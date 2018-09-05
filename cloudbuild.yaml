@@ -14,7 +14,7 @@ steps:
     entrypoint: 'bash'
     args:
       - -c
-      - './scripts/kustomize.sh build kubernetes/overlays/develop/ | kubectl apply -f -'
+      - './scripts/kustomize-apply.sh kubernetes/overlays/develop/'
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
       - 'CLOUDSDK_CONTAINER_CLUSTER=mycluster'
@@ -23,7 +23,7 @@ steps:
     entrypoint: 'bash'
     args:
       - -c
-      - './scripts/kustomize.sh build kubernetes/overlays/production/ | kubectl apply -f -'
+      - './scripts/kustomize-apply.sh kubernetes/overlays/production/'
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
       - 'CLOUDSDK_CONTAINER_CLUSTER=mycluster'
