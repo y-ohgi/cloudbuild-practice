@@ -9,13 +9,10 @@ KUSTOMIZE_OVERLAY=$1
 
 KUSTOMIZE_VERSION=1.0.7
 
-alias kubectl="/builder/kubectl.bash"
-
-echo '-------------------------'
-echo $(which kubectl)
+KUBECTL_CMD="/builder/kubectl.bash"
 
 if which kustomize ; then
-  kustomize build $KUSTOMIZE_OVERLAY | kubectl apply -f -
+  kustomize build $KUSTOMIZE_OVERLAY | ${KUBECTL_CMD} apply -f -
   exit 0
 fi
 
@@ -26,4 +23,4 @@ curl -s https://api.github.com/repos/kubernetes-sigs/kustomize/releases/latest |
   xargs curl -L -o /usr/local/bin/kustomize
 chmod +x /usr/local/bin/kustomize
 
-kustomize build $KUSTOMIZE_OVERLAY | kubectl apply -f -
+kustomize build $KUSTOMIZE_OVERLAY | ${KUBECTL_CMD} apply -f -
