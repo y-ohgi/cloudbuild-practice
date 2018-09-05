@@ -16,6 +16,8 @@ jobs:
             git config credential.helper gcloud.sh
             git remote add google ${SOURCE_REPOSITORY_URL}
             git push --all google
+            git fetch --tags
+            git push google --tags
 
 workflows:
   version: 2

@@ -1,0 +1,10 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '--tag=asia.gcr.io/$PROJECT_ID/cloudbuild-practice:$TAG_NAME'
+      - '--tag=asia.gcr.io/$PROJECT_ID/cloudbuild-practice:latest'
+      - '.'
+images:
+  - 'asia.gcr.io/$PROJECT_ID/cloudbuild-practice:$TAG_NAME'
+  - 'asia.gcr.io/$PROJECT_ID/cloudbuild-practice:latest'
