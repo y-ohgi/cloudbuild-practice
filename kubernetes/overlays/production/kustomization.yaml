@@ -1,0 +1,11 @@
+namespace: web-production
+
+bases:
+  - ../../base/
+
+patches:
+  - env_stage.yaml
+
+imageTags:
+  - name: asia.gcr.io/ohgi-gcp-practice/cloudbuild-practice
+    newTag: v0.0.4
