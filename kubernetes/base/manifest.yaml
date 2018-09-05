@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: web
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: web
+  template:
+    metadata:
+      labels:
+        run: web
+    spec:
+      containers:
+      - name: web
+        image: asia.gcr.io/ohgi-gcp-practice/cloudbuild-practice:latest
+        env:
+          - name: STAGE
+            value: default
+        ports:
+          - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  labels:
+    run: web
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+  selector:
+    run: web
