@@ -11,6 +11,8 @@ KUSTOMIZE_VERSION=1.0.7
 
 alias kubectl="/builder/kubectl.bash"
 
+which kubectl
+
 if which kustomize ; then
   kustomize build $KUSTOMIZE_OVERLAY | kubectl apply -f -
   exit 0
