@@ -9,3 +9,21 @@ steps:
     args: ["push", "asia.gcr.io/$PROJECT_ID/cloudbuild-practice:$TAG_NAME"]
   - name: 'gcr.io/cloud-builders/docker'
     args: ["push", "asia.gcr.io/$PROJECT_ID/cloudbuild-practice:latest"]
+  # 開発環境のデプロイ
+  - name: 'gcr.io/cloud-builders/kubectl'
+    entrypoint: 'bash'
+    args:
+      - -c
+      - './scripts/kustomize.sh build kubernetes/overlays/develop/ | kubectl apply -f -'
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=mycluster'
+  # 本番環境のデプロイ
+  - name: 'gcr.io/cloud-builders/kubectl'
+    entrypoint: 'bash'
+    args:
+      - -c
+      - './scripts/kustomize.sh build kubernetes/overlays/production/ | kubectl apply -f -'
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=mycluster'
