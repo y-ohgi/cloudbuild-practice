@@ -6,5 +6,5 @@ steps:
       - '--tag=asia.gcr.io/$PROJECT_ID/cloudbuild-practice:latest'
       - '.'
 images:
-  - 'gcr.io/$PROJECT_ID/cloudbuild-practice:$TAG_NAME'
-  - 'gcr.io/$PROJECT_ID/cloudbuild-practice:latest'
+  - 'asia.gcr.io/$PROJECT_ID/cloudbuild-practice:$TAG_NAME'
+  - 'asia.gcr.io/$PROJECT_ID/cloudbuild-practice:latest'
