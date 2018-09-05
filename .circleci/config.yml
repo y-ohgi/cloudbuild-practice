@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  push_code:
+    docker:
+      - image: google/cloud-sdk:alpine
+    steps:
+      - checkout
+      - run:
+          name: setup gcloud command
+          command: |
+            echo "${SOURCE_REPOSITORY_SERVICE_ACCOUNT}" | base64 -d > /service-account.json
+            gcloud auth activate-service-account --project=${GCP_PROJECT} --key-file=/service-account.json
+      - run:
+          name: push source code
+          command: |
+            git config credential.helper gcloud.sh
+            git remote add google ${SOURCE_REPOSITORY_URL}
+            git push --all google
+
+workflows:
+  version: 2
+  push_code:
+    jobs:
+      - push_code:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
