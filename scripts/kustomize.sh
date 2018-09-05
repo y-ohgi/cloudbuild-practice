@@ -2,6 +2,8 @@
 
 # e.g.) ./scripts/kustomize.sh build kubernetes/overlays/develop/ | kubectl apply -f -
 
+set -x
+
 KUSTOMIZE_VERSION=1.0.7
 
 alias kubectl="/builder/kubectl.bash"
